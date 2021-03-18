@@ -22,3 +22,5 @@ deploy:
 	git push heroku
 lint:
 	composer run-script phpcs -- --standard=PSR12 routes tests app\Http\Controllers\UrlsController.php
+install:
+	composer install
