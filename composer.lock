@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c4cd2e649301b382ecde0faca7787ba",
+    "content-hash": "237046dc010baf0add12e31355ad70f4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4834,22 +4834,27 @@
         },
         {
             "name": "twbs/bootstrap",
-            "version": "v5.0.0-beta2",
+            "version": "v4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "e50c11b8c6434b6d68ea5897771e4d35fe12f5c3"
+                "reference": "6ffb0b48e455430f8a5359ed689ad64c1143fac2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/e50c11b8c6434b6d68ea5897771e4d35fe12f5c3",
-                "reference": "e50c11b8c6434b6d68ea5897771e4d35fe12f5c3",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/6ffb0b48e455430f8a5359ed689ad64c1143fac2",
+                "reference": "6ffb0b48e455430f8a5359ed689ad64c1143fac2",
                 "shasum": ""
             },
             "replace": {
                 "twitter/bootstrap": "self.version"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -4878,7 +4883,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twbs/bootstrap/issues",
-                "source": "https://github.com/twbs/bootstrap/tree/v5.0.0-beta2"
+                "source": "https://github.com/twbs/bootstrap/tree/v4.6.0"
             },
             "funding": [
                 {
@@ -4886,7 +4891,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2021-02-10T16:14:51+00:00"
+            "time": "2021-01-19T16:16:38+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
