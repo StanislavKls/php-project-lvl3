@@ -43,7 +43,7 @@ class UrlTest extends TestCase
                 'created_at' => '2021-03-17',
                 'updated_at' => '2021-03-17'
             ]
-        );
+        ); 
         Http::fake([$this->name => Http::response(['test'], 200, ['Headers'])]);
     }
     public function testIndex()
@@ -58,9 +58,13 @@ class UrlTest extends TestCase
     }
     public function testStore()
     {
-        $response = $this->post(route('urls.store'));
+        $faker = Factory::create();
+        $urlParsed = parse_url($faker->url);
+        $url = "{$urlParsed['scheme']}://{$urlParsed['host']}";
+        $response = $this->post(route('urls.store'), ['url' => ['name' => $url]]);
         $response->assertSessionHasNoErrors();
-        $this->assertDatabaseHas('urls', ['id' => $this->id]);
+        $response->assertRedirect();
+        $this->assertDatabaseHas('urls', ['name' => $url]);
     }
     public function testEdit()
     {

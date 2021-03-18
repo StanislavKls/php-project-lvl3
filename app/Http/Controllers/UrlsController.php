@@ -37,12 +37,19 @@ class UrlsController extends Controller
         $data = parse_url($request->input('url.name'));
         $name = "{$data['scheme']}://{$data['host']}";
         $now = now();
-        DB::table('urls')->insert([
-            'created_at' => $now,
-            'updated_at' => $now,
-            'name' => $name,
-        ]);
-        $request->session()->flash('status', 'URL добавлен!');
+
+        if (DB::table('urls')->where('name', $name)->exists()) {
+            $request->session()->flash('status', 'URL уже был добавлен!');
+            return redirect()
+            ->route('home.index');
+        } else {
+            DB::table('urls')->insert([
+                'created_at' => $now,
+                'updated_at' => $now,
+                'name' => $name,
+            ]);
+            $request->session()->flash('status', 'URL добавлен!');
+        }
         return redirect()
                ->route('urls.index');
     }

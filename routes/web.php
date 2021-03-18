@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UrlsController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,9 @@ use App\Http\Controllers\UrlsController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/', function (Request $request) {
+    $flash = $request->session()->get('status');
+    return view('index', compact('flash'));
 })->name('home.index');
 
 Route::get('/urls', [UrlsController::class, 'index'])
@@ -29,7 +31,3 @@ Route::get('/urls/{id}', [UrlsController::class, 'show'])
 
 Route::post('urls/{id}/checks', [UrlsController::class, 'edit'])
 ->name('urls.checks');
-
-Route::get('/test', function () {
-    return view('test');
-});

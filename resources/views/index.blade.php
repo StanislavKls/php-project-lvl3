@@ -12,11 +12,15 @@
         </ul>
     </div>
 @endif
-
+@if (isset($flash))
+        <div class="alert alert-danger" role="alert">
+            {{ $flash }}
+        </div>
+    @endif
 <div class="starter-template text-center py-5 px-3">
 <h4> Введите адрес </h4>
 {{Form::open(['url' => route('urls.store'), 'method' => 'POST'])}}
-    {{Form::text('url[name]')}}
+    {{Form::url('url[name]')}}
     {{Form::submit('Добавить')}}
 {{Form::close()}}
 </div>
