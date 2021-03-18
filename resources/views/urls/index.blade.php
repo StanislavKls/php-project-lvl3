@@ -16,11 +16,16 @@
         <tr>
             <th>ID</th>
             <th>Имя</th>
+            <th>Дата последней проверки</th>
+            <th>Код ответа</th>
         </tr>
+        
     @foreach ($urls as $url)
     <tr>
         <td>{{ $url->id }}</td>
         <td><a href="{{ route('urls.show', $url->id) }}"> {{ $url->name }} </a></td>
+        <td>{{ $lastCheck[$url->id]->created_at ?? '' }}</td>
+        <td>{{ $lastCheck[$url->id]->status_code ?? '' }}</td>
     </tr>
     @endforeach
         </table>

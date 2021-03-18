@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Faker\Factory;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +10,8 @@ use Carbon\Carbon;
 
 class UrlTest extends TestCase
 {
-    public $id;
+    private $id;
+    private $name;
     /**
      * A basic feature test example.
      *
@@ -27,14 +26,25 @@ class UrlTest extends TestCase
         $faker = Factory::create();
 
         $urlParsed = parse_url($faker->url);
-        $name = "{$urlParsed['scheme']}://{$urlParsed['host']}";
+        $this->name = "{$urlParsed['scheme']}://{$urlParsed['host']}";
         $url = [
-            'name' => $name,
+            'name' => $this->name,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ];
         $this->id = DB::table('urls')->insertGetId($url);
-
+        DB::table('url_checks')->insert(
+            [
+                'url_id' => $this->id,
+                'status_code' => null,
+                'h1' => null,
+                'keywords' => null,
+                'description' => null,
+                'created_at' => '2021-03-17',
+                'updated_at' => '2021-03-17'
+            ]
+        );
+        Http::fake([$this->name => Http::response(['test'], 200, ['Headers'])]);
     }
     public function testIndex()
     {
@@ -51,5 +61,15 @@ class UrlTest extends TestCase
         $response = $this->post(route('urls.store'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('urls', ['id' => $this->id]);
+    }
+    public function testEdit()
+    {
+        $response = $this->get(route('urls.checks', $this->id));
+        $response->assertSessionHasNoErrors();
+        $this->assertDatabaseHas('url_checks', [
+            'url_id' => $this->id
+        ]);
+        $response = Http::get($this->name);
+        $this->assertEquals(200, $response->status());
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UrlsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +26,9 @@ Route::post('/urls/store', [UrlsController::class, 'store'])
 
 Route::get('/urls/{id}', [UrlsController::class, 'show'])
 ->name('urls.show');
+
+Route::post('urls/{id}/checks', [UrlsController::class, 'edit'])
+->name('urls.checks');
 
 Route::get('/test', function () {
     return view('test');
