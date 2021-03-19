@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function (Request $request) {
+Route::get('/', function (Request $request): Illuminate\View\View {
     $flash = $request->session()->get('status');
     return view('index', compact('flash'));
 })->name('home.index');

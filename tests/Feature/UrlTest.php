@@ -10,8 +10,8 @@ use Carbon\Carbon;
 
 class UrlTest extends TestCase
 {
-    private $id;
-    private $name;
+    private $id;   /* @phpstan-ignore-line */
+    private $name; /* @phpstan-ignore-line */
     /**
      * A basic feature test example.
      *
@@ -46,17 +46,17 @@ class UrlTest extends TestCase
         );
         Http::fake([$this->name => Http::response(['test'], 200, ['Headers'])]);
     }
-    public function testIndex()
+    public function testIndex(): void
     {
         $response = $this->get(route('urls.index'));
         $response->assertOk();
     }
-    public function testShow()
+    public function testShow(): void
     {
         $response = $this->get(route('urls.show', $this->id));
         $response->assertOk();
     }
-    public function testStore()
+    public function testStore(): void
     {
         $faker = Factory::create();
         $urlParsed = parse_url($faker->url);
@@ -66,7 +66,7 @@ class UrlTest extends TestCase
         $response->assertRedirect();
         $this->assertDatabaseHas('urls', ['name' => $url]);
     }
-    public function testEdit()
+    public function testEdit(): void
     {
         $response = $this->get(route('urls.checks', $this->id));
         $response->assertSessionHasNoErrors();
@@ -74,6 +74,6 @@ class UrlTest extends TestCase
             'url_id' => $this->id
         ]);
         $response = Http::get($this->name);
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(200, $response->status()); /* @phpstan-ignore-line */
     }
 }

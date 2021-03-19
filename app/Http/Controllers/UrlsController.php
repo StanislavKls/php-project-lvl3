@@ -10,7 +10,7 @@ use DiDom\Document;
 
 class UrlsController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\View\View
     {
 
         $urls      = DB::table('urls')->get();
@@ -28,10 +28,10 @@ class UrlsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Urls  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Urls $request)
+    public function store(Urls $request): \Illuminate\Http\RedirectResponse
     {
         $request->validated();
         $data = parse_url($request->input('url.name'));
@@ -40,8 +40,7 @@ class UrlsController extends Controller
 
         if (DB::table('urls')->where('name', $name)->exists()) {
             $request->session()->flash('status', 'URL уже был добавлен!');
-            return redirect()
-            ->route('home.index');
+            return redirect()->route('home.index');
         } else {
             DB::table('urls')->insert([
                 'created_at' => $now,
@@ -50,22 +49,21 @@ class UrlsController extends Controller
             ]);
             $request->session()->flash('status', 'URL добавлен!');
         }
-        return redirect()
-               ->route('urls.index');
+        return redirect()->route('urls.index');
     }
-    public function show(Request $request)
+    public function show(Request $request): \Illuminate\View\View
     {
         $id = $request->id;
         $url = DB::table('urls')->find($id);
         $urlInfo = DB::table('url_checks')->where('url_id', '=', $id)->get();
         return view('urls.show', compact('url', 'urlInfo'));
     }
-    public function edit(Request $request)
+    public function edit(Request $request): \Illuminate\Http\RedirectResponse
     {
         $id  = $request->id;
         $now = now();
-        $url = DB::table('urls')->select('name')->where('id', '=', $id)->first()->name;
-        $response = Http::get($url);
+        $url = DB::table('urls')->find($id);
+        $response = Http::get($url->name);
         $body = $response->body();
         $document = new Document($body);
         $h1 = optional($document->first('h1'))->text();
