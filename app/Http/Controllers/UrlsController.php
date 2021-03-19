@@ -25,12 +25,6 @@ class UrlsController extends Controller
         $flash = $request->session()->get('status');
         return view('urls.index', compact('flash', 'urls', 'lastCheck'));
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Urls  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Urls $request): \Illuminate\Http\RedirectResponse
     {
         $request->validated();
