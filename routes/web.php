@@ -23,7 +23,7 @@ Route::get('/', function (Request $request) {
 Route::get('/urls', [UrlsController::class, 'index'])
 ->name('urls.index');
 
-Route::post('/urls/store', [UrlsController::class, 'store'])
+Route::post('/urls', [UrlsController::class, 'store'])
 ->name('urls.store');
 
 Route::get('/urls/{id}', [UrlsController::class, 'show'])

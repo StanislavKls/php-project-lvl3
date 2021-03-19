@@ -43,7 +43,7 @@ class UrlTest extends TestCase
                 'created_at' => '2021-03-17',
                 'updated_at' => '2021-03-17'
             ]
-        ); 
+        );
         Http::fake([$this->name => Http::response(['test'], 200, ['Headers'])]);
     }
     public function testIndex()
