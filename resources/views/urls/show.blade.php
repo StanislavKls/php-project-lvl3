@@ -43,12 +43,12 @@
                 </tr>
                 @foreach($urlInfo as $info)
                 <tr>
-                        <td>{{ $info->id }}</td>
-                        <td>{{ $info->status_code }}</td>
-                        <td>{{ $info->h1 }}</td>
-                        <td>{{ Str::limit($info->keywords, 50) }}</td>
-                        <td>{{ Str::limit($info->description, 50) }}</td>
-                        <td>{{ $info->created_at }}</td>
+                    <td><a href="{{ route('check.show', ['id' => $url->id, 'id_check' => $info->id]) }}"> {{ $info->id }} </a></td>
+                    <td>{{ $info->status_code }}</td>
+                    <td>{{ $info->h1 }}</td>
+                    <td>{{ Str::limit($info->keywords, 50) }}</td>
+                    <td>{{ Str::limit($info->description, 50) }}</td>
+                    <td>{{ $info->created_at }}</td>
                 </tr>
                 @endforeach
         </table>

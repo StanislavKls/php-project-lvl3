@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UrlsController;
+use App\Http\Controllers\SiteCheckController;
 use Illuminate\Http\Request;
 
 /*
@@ -31,3 +32,6 @@ Route::get('/urls/{id}', [UrlsController::class, 'show'])
 
 Route::post('urls/{id}/checks', [UrlsController::class, 'edit'])
 ->name('urls.checks');
+
+Route::get('/urls/{id}/check/{id_check}', [SiteCheckController::class, 'show'])
+->name('check.show');
