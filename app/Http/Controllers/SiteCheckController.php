@@ -11,7 +11,7 @@ class SiteCheckController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $check_id
      */
     public function show(Request $request, $id, $check_id): \Illuminate\View\View
     {
