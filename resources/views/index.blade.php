@@ -16,7 +16,9 @@
         <div class="alert alert-danger" role="alert">
             {{ $flash }}
         </div>
-    @endif
+@endif
+
+<p class="lead">Page Analyzer – сайт, который анализирует указанные страницы на SEO пригодность.</p>
 <div class="starter-template text-center py-5 px-3">
 <h4> Введите адрес </h4>
 {{Form::open(['url' => route('urls.store'), 'method' => 'POST'])}}
